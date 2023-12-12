@@ -1,0 +1,27 @@
+#The input generator that will be used. 1 for Monkey, 2 for DroidBot
+TOOL_CHOICE=1
+
+#The sizes of the random inputs to use in monkey, a list of space-separated numbers
+INPUT_SIZES=3
+
+#The maximum time we allow for the test of an apk, this is useful to avoid being stuck on unexpected errors
+#See the man of timeout for details on the format
+TIMEOUT_DELAY=1m
+
+#The directory to search for apks, all apks in this directory will be tested
+SOURCE_DIRECTORY=../raw_dataset
+
+#The directory that will store the cured apks, it should be empty when the script is first started, otherwise the script might fail and data will be LOST
+#It will be created if non-existent
+CURATED_APK_DIRECTORY=../dynamic_dataset/apks
+
+#The directory where to dump the log files and the database 
+DESTINATION_DIRECTORY=../dynamic_dataset/logs
+
+#A file containing a table of correspondance between legitimate apks and repackaged ones, it is optional
+#It is expected the following format for each line : legitimateSHA256,repackagedSHA256
+#It is expected that repackaged apks appear only once
+REPACKAGED_PAIRS_FILE=./repackTest.txt
+
+#The arguments for strace
+STRACE_ARGS=-f -ttt

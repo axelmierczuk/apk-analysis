@@ -1,4 +1,4 @@
 .idea
 venv
-dataset/CICMalAnal2017
-dataset/MalDroid-2020
+dataset/CICMalAnal2017/*dataset*
+dataset/MalDroid-2020/*dataset*
