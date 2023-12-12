@@ -15,27 +15,19 @@
 
 ## Overview
 
-This project is about analyzing APK files for potential threats or malware. We make use of both static and dynamic analysis methods in order to get a thorough understanding of each APK sample. The datasets used in this project are collected from publicly available sources, preprocessed, and then utilized to train machine learning models. 
+This research presents a comprehensive approach to analyzing Android Package Kits (APKs) using both dynamic and static analysis methods. The primary objective is to identify and categorize APKs into various types, including adware, ransomware, scareware, and benign applications. The study utilizes a dataset derived from the CIC-AndMal2017 and CICMalDroid 2020 datasets, enriched with dynamic and static features. Dynamic analysis is performed based on system calls at runtime, while static analysis involves extracting features using Androguard. The paper discusses the process of dataset creation, challenges faced, and the reasons for selecting a subset of the available samples. Various machine learning models such as XGBoost, Decision Tree, and SVM Classifier have been trained and optimized to classify the APKs, and their performance is evaluated and compared. The research also outlines future directions for enhancing the dataset and refining the analysis methods.
 
-The models used include XGBoost Classifier, Decision Tree Classifier with Ada Boost, and Support Vector Classifier (SVC), all optimized using Grid Search to fine-tune the parameters. The performance of these models is outlined in great detail in the Results section.
-
-In future work, we aim to improve the dataset by utilizing all available samples, while also enhancing the features extracted from both dynamic and static analysis for better model performance.
 
 ## Dataset
 
-Note: Will not be uploading raw samples used for building CSVs in `dataset`. These can be found at the following locations:
+The dataset, crucial to this research, was constructed due to challenges in finding comprehensive datasets encompassing both dynamic and static features of APKs. Raw APKs were sourced from “CIC-AndMal2017” [1] and “CICMalDroid 2020” [2]. The dynamic analysis dataset is based on system calls during runtime, gathered using “Automated APK Tracing” [3]. Conversely, the static dataset comprises various features extracted via Androguard [4]. The final dataset, a subset of all samples from the aforementioned sources, is available in the CSV format and encompasses 1,357 samples, with a focus on balancing between malicious (220 samples) and benign (1,137 samples) APKs.
 
-- https://www.unb.ca/cic/datasets/maldroid-2020.html
-- https://www.unb.ca/cic/datasets/andmal2017.html
 
-Building a dataset was required due to challenges around finding an adequate dataset with both dynamic and static features.
-Raw APKs were collected from “CIC-AndMal2017” [1] and “CICMalDroid 2020” [2] (as listed above).
-The dynamic analysis dataset is based on syscalls at run-time, and gathered using the project “Automated APK Tracing” [3].
-On the other hand, the static dataset based on a variety of features extracted using Androguard [4].
+_Note: Will not be uploading raw samples used for building CSVs in `dataset`. These can be found at the following locations:_
 
-The full dataset used to train models can be found at `dataset/dataset-dynamic-static-joined.csv`. The dataset found in the CSV 
-is actually a subset of all the samples from the “CIC-AndMal2017” and “CICMalDroid 2020” samples. The main reason for this is
-due to the amount of time it takes to run dynamic analysis.
+- _https://www.unb.ca/cic/datasets/maldroid-2020.html_
+- _https://www.unb.ca/cic/datasets/andmal2017.html_
+
 
 Below is a summary of the data in the dataset:
 
@@ -52,13 +44,7 @@ Below is a summary of the data in the dataset:
 
 ## Models
 
-The following models were trained:
-
-- XGBoost Classifier
-- Decision Tree Classifier boosted with Ada Boost
-- Support Vector Classifier (SVC)
-
-For each model, Grid Search was used to optimize parameters.
+The study employs three machine learning models: XGBoost Classifier, Decision Tree Classifier augmented with Ada Boost, and Support Vector Classifier (SVC). Each model underwent a rigorous parameter optimization process using Grid Search, resulting in the identification of the most effective parameters for classification accuracy.
 
 
 Best parameters for the `XGBoost Classifier` were:
@@ -87,39 +73,38 @@ Best parameters for the `SVC` were:
 ## Results
 
 ### XGBoost
-
-|                  | **Precision**      | **Recall**         | **F1-Score**       |
-|------------------|--------------------|--------------------|--------------------|
-| **Benign**       | 0.9786324786324786 | 0.9913419913419913 | 0.9849462365591398 | 
-| **Malicious**    | 0.9473684210526315 | 0.8780487804878049 | 0.9113924050632912 | 
-| **Accuracy**     | 0.9742647058823529 | 0.9742647058823529 | 0.9742647058823529 | 
-| **Macro Avg**    | 0.9630004498425551 | 0.9346953859148981 | 0.9481693208112155 | 
-| **Weighted Avg** | 0.9739198817178694 | 0.9742647058823529 | 0.9738590781351332 |
+|                  | **Precision** | **Recall** | **F1-Score** |
+|------------------|---------------|------------|--------------|
+| **Benign**       | 0.978632      | 0.991341   | 0.984946     | 
+| **Malicious**    | 0.947368      | 0.878048   | 0.911392     | 
+| **Accuracy**     | 0.974264      | 0.974264   | 0.974264     | 
+| **Macro Avg**    | 0.963000      | 0.934695   | 0.948169     | 
+| **Weighted Avg** | 0.973919      | 0.974264   | 0.973859     |
 
 ![feature_importance_xgb.png](images%2Ffeature_importance_xgb.png)
 
 ### Decision Tree
 
-|                  | **Precision**      | **Recall**         | **F1-Score**       |
-|------------------|--------------------|--------------------|--------------------|
-| **Benign**       | 0.9663865546218487 | 0.9956709956709957 | 0.9808102345415779 |
-| **Malicious**    | 0.9705882352941176 | 0.8048780487804879 | 0.8800000000000001 |
-| **Accuracy**     | 0.9669117647058824 | 0.9669117647058824 | 0.9669117647058824 |
-| **Macro Avg**    | 0.9684873949579832 | 0.9002745222257418 | 0.930405117270789  |
-| **Weighted Avg** | 0.9670198961937717 | 0.9669117647058824 | 0.9656145741878842 |
+|                  | **Precision** | **Recall** | **F1-Score** |
+|------------------|---------------|------------|--------------|
+| **Benign**       | 0.966386      | 0.995670   | 0.980810     |
+| **Malicious**    | 0.970588      | 0.804878   | 0.880000     |
+| **Accuracy**     | 0.966911      | 0.966911   | 0.966911     |
+| **Macro Avg**    | 0.968487      | 0.900274   | 0.930405     |
+| **Weighted Avg** | 0.967019      | 0.966911   | 0.965614     |
 
 
 ![feature_importance_dt.png](images%2Ffeature_importance_dt.png)
 
 ### SVM Classifier
 
-|                  | **Precision**      | **Recall**         | **F1-Score**       |
-|------------------|--------------------|--------------------|--------------------|
-| **Benign**       | 0.875              | 1.0                | 0.9333333333333333 |
-| **Malicious**    | 1.0                | 0.1951219512195122 | 0.326530612244898  |
-| **Accuracy**     | 0.8786764705882353 | 0.8786764705882353 | 0.8786764705882353 |
-| **Macro Avg**    | 0.9375             | 0.5975609756097561 | 0.6299319727891157 |
-| **Weighted Avg** | 0.8938419117647058 | 0.8786764705882353 | 0.8418667466986794 |
+|                  | **Precision** | **Recall** | **F1-Score** |
+|------------------|---------------|------------|--------------|
+| **Benign**       | 0.875000      | 1.000000   | 0.933333     |
+| **Malicious**    | 1.000000      | 0.195121   | 0.326530     |
+| **Accuracy**     | 0.878676      | 0.878676   | 0.878676     |
+| **Macro Avg**    | 0.937500      | 0.597560   | 0.629931     |
+| **Weighted Avg** | 0.893841      | 0.878676   | 0.841866     |
 
 
 ### Summary
@@ -130,9 +115,12 @@ Best parameters for the `SVC` were:
 
 ## Future Work
 
+- Capture network traffic and implement features.
+- Review opportunities for unsupervised learning, which may lead to lineage inferencing.
 - Improve dataset by using all 22,832 samples in order to reduce over-fitting.
 - Improve dynamic analysis features extracted / collected for more balanced feature weights and potential model improvements.
 - Improve static analysis features extracted / collected for potential model improvements.
+
 
 ## References
 
@@ -143,3 +131,4 @@ Best parameters for the `SVC` were:
 [3] R. Khoury, "Automated APK Tracing," GitHub Repository. [Online]. Available: https://github.com/RaphaelKhoury/automatedapk-tracing.
 
 [4] Androguard, “Androguard/androguard: Reverse engineering and Pentesting for Android Applications,” GitHub, https://github.com/androguard/androguard
+
