@@ -75,7 +75,7 @@ pexpect==4.9.0
 Pillow==10.1.0
 platformdirs==4.0.0
 # Editable Git install with no remote (plugin==0.1)
--e /home/kali/DataspellProjects/CS-GY6923-FP/plugin
+-e ./plugin
 prometheus-client==0.19.0
 prompt-toolkit==3.0.41
 psutil==5.9.6
