@@ -44,10 +44,10 @@ Below is a summary of the data in the dataset:
 
 ## Models
 
-The study employs three machine learning models: XGBoost Classifier, Decision Tree Classifier augmented with Ada Boost, and Support Vector Classifier (SVC). Each model underwent a rigorous parameter optimization process using Grid Search, resulting in the identification of the most effective parameters for classification accuracy.
+The study employs three machine learning models: _XGBoost Classifier_, _Decision Tree Classifier_ augmented with _Ada Boost_, and _Support Vector Classifier (SVC)_. Each model underwent a rigorous parameter optimization process using _Grid Search_, resulting in the identification of the most effective parameters for classification accuracy.
 
 
-Best parameters for the `XGBoost Classifier` were:
+Best parameters for the _XGBoost_ were:
 
 - Column Sample By Tree - 0.6
 - Gamma - 1 
@@ -55,14 +55,14 @@ Best parameters for the `XGBoost Classifier` were:
 - Min Child Weight - 1 
 - Sub-sample - 0.8
 
-Best parameters for the `Decision Tree` were:
+Best parameters for the _Decision Tree_ were:
 
 - Criterion - Gini
 - Max Depth - 6
 - Min Samples Leaf - 5
 - Min Samples Split - 90
 
-Best parameters for the `SVC` were:
+Best parameters for the _SVC_ were:
 
 - C - 10
 - Gamma - 0.0001
