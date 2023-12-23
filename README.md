@@ -1,4 +1,4 @@
-# Dynamic and Static Analysis for APK Analysis
+# Dynamic and Static Analysis for APKs
 
 ## Table of Contents
 1. [Overview](#overview)
